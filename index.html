@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0F172A" />
+    <title>ShikshaSlide Studio</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+        background: radial-gradient(
+            900px 500px at 50% -10%,
+            rgba(79, 70, 229, 0.35),
+            transparent 60%
+          ),
+          radial-gradient(
+            700px 400px at 50% 110%,
+            rgba(13, 148, 136, 0.25),
+            transparent 60%
+          ),
+          #0f172a;
+        color: #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: calc(24px + env(safe-area-inset-top))
+          calc(24px + env(safe-area-inset-right))
+          calc(24px + env(safe-area-inset-bottom))
+          calc(24px + env(safe-area-inset-left));
+      }
+      .splash {
+        width: 100%;
+        max-width: 460px;
+        text-align: center;
+      }
+      .logo {
+        width: 84px;
+        height: 84px;
+        margin: 0 auto 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #4f46e5, #0d9488);
+        box-shadow: 0 18px 40px rgba(79, 70, 229, 0.45);
+      }
+      h1 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #f8fafc;
+      }
+      .tagline {
+        margin: 6px 0 26px;
+        font-size: 13px;
+        color: #94a3b8;
+      }
+      form {
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        border-radius: 16px;
+        padding: 16px;
+        text-align: left;
+        backdrop-filter: blur(8px);
+      }
+      label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #818cf8;
+        margin-bottom: 8px;
+      }
+      input {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: #020617;
+        color: #f1f5f9;
+        padding: 12px;
+        font-size: 14px;
+        outline: none;
+      }
+      input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+      }
+      button {
+        width: 100%;
+        margin-top: 12px;
+        border: 0;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #4f46e5, #0d9488);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        padding: 13px;
+        cursor: pointer;
+      }
+      button:active {
+        transform: scale(0.98);
+      }
+      .hint {
+        margin-top: 18px;
+        font-size: 11px;
+        line-height: 1.7;
+        color: #64748b;
+      }
+      .hint b,
+      .hint code {
+        color: #a5b4fc;
+        font-size: 11px;
+      }
+      .status {
+        margin-top: 12px;
+        min-height: 16px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #34d399;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="splash">
+      <div class="logo" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 4 2 9l10 5 10-5-10-5Z"
+            fill="#ffffff"
+          />
+          <path
+            d="M6 11.5V16c0 1.66 2.69 3 6 3s6-1.34 6-3v-4.5l-6 3-6-3Z"
+            fill="#ffffff"
+            opacity="0.85"
+          />
+          <path
+            d="M22 9v6"
+            stroke="#FBBF24"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+          <circle cx="22" cy="16.2" r="1.3" fill="#FBBF24" />
+        </svg>
+      </div>
+      <h1>ShikshaSlide Studio</h1>
+      <p class="tagline">AI PPT Maker &amp; Presentation Editor for Online Teachers</p>
+
+      <form id="serverForm">
+        <label for="serverUrl">Next.js Server URL</label>
+        <input
+          id="serverUrl"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="http://10.0.2.2:3000"
+        />
+        <button type="submit">Launch Studio</button>
+      </form>
+
+      <p class="hint">
+        <b>Android emulator:</b> use <code>http://10.0.2.2:3000</code> (maps to your
+        computer).<br />
+        <b>Physical device:</b> run <code>npm run build && npm run start</code> on your
+        computer and enter its LAN IP, e.g. <code>http://192.168.1.10:3000</code>
+        (allow port 3000 in the firewall).<br />
+        Or deploy the Next.js app and enter its HTTPS URL.<br />
+        Open the shell with <code>?reset=1</code> to change the saved server.
+      </p>
+      <p id="status" class="status"></p>
+    </div>
+
+    <script>
+      (function () {
+        var KEY = "shiksha_server_url";
+        var params = new URLSearchParams(location.search);
+        if (params.has("reset")) {
+          try {
+            localStorage.removeItem(KEY);
+          } catch (e) {}
+        }
+        var input = document.getElementById("serverUrl");
+        var status = document.getElementById("status");
+        var stored = null;
+        try {
+          stored = localStorage.getItem(KEY);
+        } catch (e) {}
+        input.value = stored || "http://10.0.2.2:3000";
+
+        function normalize(v) {
+          v = (v || "").trim();
+          if (!v) return "";
+          if (!/^https?:\/\//i.test(v)) v = "http://" + v;
+          return v.replace(/\/+$/, "");
+        }
+        function go(url) {
+          status.textContent = "Connecting to " + url + " ...";
+          try {
+            localStorage.setItem(KEY, url);
+          } catch (e) {}
+          location.replace(url);
+        }
+        document
+          .getElementById("serverForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            var url = normalize(input.value);
+            if (url) go(url);
+          });
+        if (stored) {
+          status.textContent = "Auto-connecting to saved server...";
+          setTimeout(function () {
+            go(normalize(stored));
+          }, 700);
+        }
+      })();
+    </script>
+  </body>
+</html>

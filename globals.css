@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: "Plus Jakarta Sans", "Noto Sans Devanagari", system-ui,
+      -apple-system, sans-serif;
+    /* Respect device notches / safe areas inside the Capacitor WebView */
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+  }
+}
+
+/* Smooth Slide Transitions for Live Presenter Mode */
+@keyframes deckFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes deckSlidePush {
+  from {
+    opacity: 0.25;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes deckZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes deckFlipIn {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(-18deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(0deg);
+  }
+}
+
+@keyframes deckCurtainRise {
+  from {
+    opacity: 0.1;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.deck-trans-fade {
+  animation: deckFadeIn 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.deck-trans-slide {
+  animation: deckSlidePush 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.deck-trans-zoom {
+  animation: deckZoomIn 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.deck-trans-flip {
+  animation: deckFlipIn 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.deck-trans-curtain {
+  animation: deckCurtainRise 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Element Entrance Animations */
+@keyframes elFadeUp {
+  from {
+    opacity: 0;
+    margin-top: 14px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@keyframes elPopIn {
+  0% {
+    opacity: 0;
+    scale: 0.88;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes elSlideLeft {
+  from {
+    opacity: 0;
+    margin-left: 22px;
+  }
+  to {
+    opacity: 1;
+    margin-left: 0;
+  }
+}
+
+.slide-el-anim-fade-up {
+  animation: elFadeUp 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.slide-el-anim-pop-in {
+  animation: elPopIn 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.slide-el-anim-slide-left {
+  animation: elSlideLeft 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.slide-el-anim-typewriter {
+  animation: deckFadeIn 450ms ease-out both;
+}
